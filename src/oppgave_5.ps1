@@ -22,39 +22,39 @@ $kortstokksjekk = $kortstokksjekk.Substring(0,$kortstokksjekk.Length-1)
 return $kortstokksjekk
 }
 
-function kortstokksumfunc {[OutputType([String])]
+function kortstokksumfunc {[OutputType([Int])]
     param ([object[]]$kortstokk)
     
-    [int]$kortstokksum = ""
-    [int]$kortverdi = ""
+    $kortstokksum = 0
+    
 
     foreach ($kort in $kortstokk) {
         
         if ($kort.value -eq "A") {
-            [int]$kortverdi = "11"
+            $kortstokksum = $kortstokksum + 11
                       
         }
         elseif ($kort.value -eq "K") {
-            [int]$kortverdi = "10"
+            $kortstokksum = $kortstokksum + 10
            
         }
         elseif ($kort.value -eq "Q") {
-            [int]$kortverdi = "10"
+            $kortstokksum = $kortstokksum + 10
            
         }
         elseif ($kort.value -eq "J") {
-            [int]$kortverdi = "10"
+            $kortstokksum = $kortstokksum + 10
             
         }
         else {
-            [int]$kortverdi = $kort.value   
+            $kortstokksum = $kortstokksum + $kort.value  
         }
          
-        [int]$kortstokksum = [int]$kortstokksum + [int]$kortverdi    
+            
         
           
     }
-    
+        
         return $kortstokksum
 
 
