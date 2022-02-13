@@ -70,11 +70,16 @@ $kortstokk = $webrequest.Content | ConvertFrom-Json
 Write-Output "Kortstokk: $(kortstokkstringfunc -kortstokk $kortstokk)"
 Write-Output "Poengsum: $(kortstokksumfunc -kortstokk $kortstokk)"
 
-$kortstokk = $(kortstokkstringfunc -kortstokk $kortstokk) -split (",")
-$meg = $kortstokk[0..1] 
-Write-Output "Meg: $($meg -join (","))" 
-$kortstokk = $kortstokk[2..$kortstokk.count]
-$magnus = $kortstokk[0..1]
-Write-Output "Magnus $($magnus -join (","))" 
-$kortstokk = $kortstokk[2..$kortstokk.count]
-Write-Output "Kortstokk: $($kortstokk -join (","))"
+
+
+ $meg = (kortstokkstringfunc -kortstokk $kortstokk[0..1])
+ Write-Output "meg:$meg"
+
+ $kortstokk = $kortstokk[2..$kortstokk.Count]
+
+ $magnus = (kortstokkstringfunc -kortstokk $kortstokk[0..1])
+ Write-Output "Magnus:$magnus"
+
+ $kortstokk = $kortstokk[2..$kortstokk.Count]
+ $kortstokk = $(kortstokkstringfunc -kortstokk $kortstokk)
+ Write-Output "Kortstokk: $kortstokk"
