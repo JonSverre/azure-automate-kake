@@ -26,34 +26,17 @@ function kortstokksumfunc {[OutputType([Int])]
     param ([object[]]$kortstokk)
     
     $kortstokksum = 0
-    
 
     foreach ($kort in $kortstokk) {
         
-        if ($kort.value -eq "A") {
-            $kortstokksum = $kortstokksum + 11
-                      
+        $kortstokksum += switch ($kort.value){
+            { $_ -cin @('J', 'K', 'Q' ) } { 10 }
+            'A' { 11 }
+            default { $kort.value }
         }
-        elseif ($kort.value -eq "K") {
-            $kortstokksum = $kortstokksum + 10
-           
-        }
-        elseif ($kort.value -eq "Q") {
-            $kortstokksum = $kortstokksum + 10
-           
-        }
-        elseif ($kort.value -eq "J") {
-            $kortstokksum = $kortstokksum + 10
-            
-        }
-        else {
-            $kortstokksum = $kortstokksum + $kort.value  
-        }
+      
     }
-        
-        return $kortstokksum
-
-
+   return $kortstokksum
 }
     
  function kortskrivvinnerfunc {
@@ -66,15 +49,15 @@ function kortstokksumfunc {[OutputType([Int])]
          $kortstokkMeg
      )
      Write-Output "Vinner: $vinner"
-     Write-Output "magnus | $magnus | $kortStokkMagnus"    
-     Write-Output "meg    | $meg | $kortStokkMeg"
- }
+     Write-Output "magnus | $(kortstokksumfunc -kortstokk $kortStokkMagnus) | $(kortstokkstringfunc -kortstokk $kortStokkMagnus)"    
+     Write-Output "meg    | $(kortstokksumfunc -kortstokk $kortStokkMeg) | $(kortstokkstringfunc -kortstokk $kortStokkMeg)"
+    }
 
 
  try {
     $webrequest = Invoke-WebRequest -uri $UrlKortstokk
    
-}
+    }
 catch {
     Write-Error "Denne Url har ikke noen kortstokk" -ErrorAction Stop
 }
@@ -88,35 +71,30 @@ Write-Output "Poengsum: $(kortstokksumfunc -kortstokk $kortstokk)"
 
 
 
-$meg = (kortstokkstringfunc -kortstokk $kortstokk[0..1])
-#Write-Output "meg:$meg"
+$kortStokkMeg = $kortstokk[0..1]
 
-$kortstokksum = $(kortstokksumfunc -kortstokk $kortstokk)
+
 $kortstokk = $kortstokk[2..$kortstokk.Count]
-$megkortsum =$($kortstokksum) - $(kortstokksumfunc -kortstokk $kortstokk)
-#Write-Output "meg:$megkortsum"
 
-$magnus = (kortstokkstringfunc -kortstokk $kortstokk[0..1])
-#Write-Output "Magnus:$magnus"
 
-$kortstokksum = $(kortstokksumfunc -kortstokk $kortstokk)
+$kortStokkMagnus = $kortstokk[0..1]
+
+
+
 $kortstokk = $kortstokk[2..$kortstokk.Count]
-$magnuskortsum =$($kortstokksum) - $(kortstokksumfunc -kortstokk $kortstokk)
-#Write-Output "magnus:$magnuskortsum"
 
-#Write-Output $blackjack
-if ($megkortsum -eq $blackjack -and $magnuskortsum -eq $blackjack) {
+if ((kortstokksumfunc -kortstokk $kortStokkMeg) -eq $blackjack -and (kortstokksumfunc -kortstokk $kortStokkMagnus) -eq $blackjack) {
   
-    kortskrivvinnerfunc -vinner "Draw" -kortStokkMagnus $magnuskortsum -kortStokkMeg $megkortsum
+    kortskrivvinnerfunc -vinner "Draw" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
     exit
  }
- elseif ($megkortsum -eq $blackjack -and $magnuskortsum -ne $blackjack) {
+ elseif ((kortstokksumfunc -kortstokk $kortStokkMeg) -eq $blackjack -and (kortstokksumfunc -kortstokk $kortStokkMagnus) -ne $blackjack) {
   
-   kortskrivvinnerfunc -vinner "meg" -kortStokkMagnus $magnuskortsum -kortStokkMeg $megkortsum
+   kortskrivvinnerfunc -vinner "meg" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
    exit
 }
-elseif ($magnuskortsum -eq $blackjack -and $megkortsum -ne $blackjack) {
+elseif ((kortstokksumfunc -kortstokk $kortStokkMagnus) -eq $blackjack -and (kortstokksumfunc -kortstokk $kortStokkMeg) -ne $blackjack){ 
   
-   kortskrivvinnerfunc -vinner "magnus" -kortStokkMagnus $magnuskortsum -kortStokkMeg $megkortsum
+   kortskrivvinnerfunc -vinner "magnus" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
    exit
 }
