@@ -27,3 +27,4 @@ jobs:
                 inlineScript: |
                  az account show
                  src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
+                azPSVersion: "latest"
