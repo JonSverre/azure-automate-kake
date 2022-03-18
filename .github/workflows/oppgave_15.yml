@@ -1,0 +1,22 @@
+name: oppgave_15
+on: 
+  push:
+    branches:
+      - main
+      - production
+    paths:
+      - src/oppgave_10.ps1
+  workflow_dispatch:
+
+jobs:
+  job1:
+    defaults:
+      run:
+        shell: pwsh
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      
+      - name: Run Blackjack script file
+        run: git checkout HEAD^
