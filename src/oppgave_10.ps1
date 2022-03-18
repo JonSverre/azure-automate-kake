@@ -99,32 +99,10 @@ while ((kortstokksumfunc -kortstokk $kortStokkMagnus) -lt (kortstokksumfunc -kor
 
 if ((kortstokksumfunc -kortstokk $kortStokkMagnus) -le 21 -and (kortstokksumfunc -kortstokk $kortStokkMagnus) -lt (kortstokksumfunc -kortstokk $kortStokkMeg) ){
 
-    kortskrivvinnerfunc -vinner "Meg" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
+    kortskrivvinnerfunc -vinner "Magnus" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
     exit
 }
 Else {
-     kortskrivvinnerfunc -vinner "Magnus" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
+     kortskrivvinnerfunc -vinner "Meg" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
  exit
 }
-#if ((kortstokksumfunc -kortstokk $kortStokkMeg) -gt $blackjack){
-
-#    kortskrivvinnerfunc -vinner "Magnus" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
-#    exit
-#}
-
-#if ((kortstokksumfunc -kortstokk $kortStokkMeg) -eq $blackjack -and (kortstokksumfunc -kortstokk $kortStokkMagnus) -eq $blackjack) {
-#  
-#    kortskrivvinnerfunc -vinner "Draw" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
-#    exit
-# }
-# elseif ((kortstokksumfunc -kortstokk $kortStokkMeg) -eq $blackjack -and (kortstokksumfunc -kortstokk $kortStokkMagnus) -ne $blackjack) {
-#  
-#   kortskrivvinnerfunc -vinner "meg" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
-#   exit
-#}
-#elseif ((kortstokksumfunc -kortstokk $kortStokkMagnus) -eq $blackjack -and (kortstokksumfunc -kortstokk $kortStokkMeg) -ne $blackjack){ 
-#  
-#   kortskrivvinnerfunc -vinner "magnus" -kortStokkMagnus $kortStokkMagnus -kortStokkMeg $kortStokkMeg
-#   exit
-#}
-
