@@ -21,5 +21,9 @@ jobs:
          creds: ${{secrets.GIDETVIDERE}}
          enable-AzPSSession: true
 
-      - name: Run Blackjack script file
-        run:  src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
+      - name: Azure Powershell
+        uses: Azure/powershell@v1
+        with:
+                inlineScript: |
+                 az account show
+                 src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
