@@ -19,4 +19,4 @@ jobs:
         uses: actions/checkout@v3
       
       - name: Run Blackjack script file
-        run: git checkout HEAD^
+        run:  src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
