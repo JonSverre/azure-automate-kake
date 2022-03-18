@@ -22,6 +22,4 @@ jobs:
          enable-AzPSSession: true
 
       - name: Run Blackjack script file
-                
-        run: | 
-         src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
+        run:  src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
