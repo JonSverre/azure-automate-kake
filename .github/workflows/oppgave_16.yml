@@ -20,9 +20,6 @@ jobs:
         with:
          creds: ${{secrets.GIDETVIDERE}}
          enable-AzPSSession: true
-
-      - name: Azure Powershell
-        uses: Azure/powershell@v1
       - run: |
            ./src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
            azPSVersion: "latest"
