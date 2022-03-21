@@ -24,7 +24,5 @@ jobs:
       - name: Azure Powershell
         uses: Azure/powershell@v1
         with:
-                inlineScript: |
-                 az account show
-                 src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
+                inlineScript: "src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'"
                 azPSVersion: "latest"
