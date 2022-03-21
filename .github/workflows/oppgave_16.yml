@@ -23,6 +23,6 @@ jobs:
 
       - name: Azure Powershell
         uses: Azure/powershell@v1
-        run: |
-          ./src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
-          azPSVersion: "latest"
+      - run: |
+           ./src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
+           azPSVersion: "latest"
