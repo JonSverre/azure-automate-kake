@@ -1,6 +1,8 @@
 name: oppgave_17
 on: 
   push:
+    paths:
+      - srv/funcApp/*
     branches:
       - main
       - production
