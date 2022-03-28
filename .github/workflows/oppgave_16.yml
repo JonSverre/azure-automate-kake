@@ -4,8 +4,7 @@ on:
     branches:
       - main
       - production
-    paths:
-      - src/oppgave_10.ps1
+   
   workflow_dispatch:
 
 jobs:
@@ -13,13 +12,17 @@ jobs:
     defaults:
       run:
         shell: pwsh
+        working-directory: ${{ github.workspace }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Run Blackjack script file
+        run: ./src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
+          
       - name: Login via Az module
         uses: azure/login@v1
         with:
          creds: ${{secrets.GIDETVIDERE}}
          enable-AzPSSession: true
-      - run: |
-           src/oppgave_10.ps1 -UrlKortstokk 'http://nav-deckofcards.herokuapp.com/shuffle'
-           azPSVersion: "latest"
+     
